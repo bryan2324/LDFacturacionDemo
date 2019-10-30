@@ -1,0 +1,116 @@
+﻿    @model IEnumerable<LDFacturacionDO.Factura>
+
+    @{
+        ViewBag.Title = "Preview";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Facturación</h2>
+    <hr /><br />
+
+    @foreach (var item in Model)
+    {
+        <div class="form-row animated fadeIn">
+            <div class="form-group col-md-6">
+                <label><strong>Fecha</strong></label>
+                <input type="email" readonly="readonly" class="form-control" value="@item.fecha">
+            </div>
+            <div class="form-group col-md-6 animated fadeIn">
+                <label><strong>Impuesto</strong></label>
+                <input type="text" readonly="readonly" class="form-control" value="13%">
+            </div>
+        </div>
+        <div class="form-group">
+            <label><strong>Cliente</strong></label>
+            <input type="text" readonly="readonly" class="form-control" value="@item.cliente">
+        </div>
+        <br />
+    }
+    <p>
+        <input class="btn btn-primary btn-md" type="button" value="Agregar Articulos" onclick="location.href='@Url.Action("Create", "Factura_Articulo")'" />
+    </p>
+    <table class="table animated fadeIn">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayName("Codigo")
+                </th>
+                <th>
+                    @Html.DisplayName("Descripcion")
+                </th>
+                <th>
+                    @Html.DisplayName("Precio")
+                </th>
+                <th>
+                    @Html.DisplayName("Cantidad")
+                </th>
+                <th>
+                    @Html.DisplayName("Subtotal")
+                </th>
+                <th>
+                    @Html.DisplayName("Impuesto")
+                </th>
+                <th>
+                    @Html.DisplayName("Total")
+                </th>
+            </tr>
+            foreach (var elementos in item.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => elementos.codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => elementos.descripcion)
+                    </td>
+                    <td>
+                        ₡ @Html.DisplayFor(modelItem => elementos.precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => elementos.cantidad)
+                    </td>
+                    <td>
+                        ₡ @Html.DisplayFor(modelItem => elementos.subtotal)
+                    </td>
+                    <td>
+                        ₡ @Html.DisplayFor(modelItem => elementos.impuesto)
+                    </td>
+                    <td>
+                        ₡@Html.DisplayFor(modelItem => elementos.total)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = elementos.codigo }, new { @class = "btn btn-primary btn-sm" })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <br />
+    <br />
+    @foreach (var item in Model)
+    {
+        <p>
+            <strong>
+                Subtotal:
+            </strong> ₡@Html.DisplayFor(model => item.subtotal, "{0:n0}")
+            <br />
+            <strong>
+                Impuesto:
+            </strong> ₡@Html.DisplayFor(model => item.impuesto, "{0:n0}")
+            <br />
+            <strong>
+                Total:
+            </strong> ₡@Html.DisplayFor(model => item.total, "{0:n0}")
+            <br />
+        </p>
+    }
+    <div class="row animated fadeIn">
+        <div class="col">
+            <input type="button" value="Cancelar Factura" class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "Factura_Articulo")';" />
+        </div>
+        <div class="col">
+            <input type="button" value="Finalizar Factura" class="btn btn-success" onclick="location.href='@Url.Action("Show", "Factura")';" />
+        </div>
+    </div>
+    <br /><br />

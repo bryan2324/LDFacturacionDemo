@@ -1,0 +1,12 @@
+﻿body {
+    background-color:black;
+}
+.navbar {
+    visibility:hidden;
+}
+footer {
+    visibility: hidden;
+}
+hr {
+    visibility: hidden;
+}

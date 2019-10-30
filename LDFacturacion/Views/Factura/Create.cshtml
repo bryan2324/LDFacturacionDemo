@@ -1,0 +1,45 @@
+﻿@model LDFacturacionDO.Factura
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="~/Content/modalStyle.css" type="text/css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="container" style="width:40%;margin-top:2%">
+                <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+                    <br /><br />
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Crear factura</h3>
+                            </div>
+                            <div class="modal-body">
+                                @using (Html.BeginForm("create", "Factura", FormMethod.Post, new { @class = "signup-form2", enctype = "multipart/form-data" }))
+                                {
+                                    <label>Cliente:</label>
+                                    @Html.TextBoxFor(model => model.cliente, new { @class = "form-control", @placeholder = "Nombre del cliente", id = "nombreCliente", required = "required" })
+                                    <br /><br />
+                                    <div class="modal-footer">
+                                        <input type="button" value="Cancelar factura" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Factura")';" />
+                                        <input type="submit" value="Crear" class="btn btn-primary" id="btnSubmit" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/modals.js"></script>
+}

@@ -1,0 +1,75 @@
+﻿@model LDFacturacionDO.Articulo
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Html.Raw(TempData["msg"])
+}
+@section Styles {
+    <link href="~/Content/modalStyle.css" type="text/css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <div class="container" style="width:40%;margin-top:2%">
+                <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+                    <br /><br />
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Agregar articulo</h3>
+                            </div>
+                            <div class="modal-body">
+                                @using (Html.BeginForm("create", "articulos", FormMethod.Post, new { @class = "signup-form2", enctype = "multipart/form-data" }))
+                                {
+                                    <label>Codigo Producto:</label>
+                                    @Html.TextBoxFor(model => model.codigo, new { @class = "form-control", id = "codProducto", @placeholder = "Codigo Producto", required = "required" })
+                                    <br />
+                                    <label>Descripción:</label>
+                                    @Html.TextBoxFor(s => s.descripcion, new { @class = "form-control", id = "desc", @placeholder = "Descripción", required = "required", type = "text" })
+                                    <br />
+                                    <label>Costo:</label>
+                                    @Html.TextBoxFor(model => model.costo, new { @class = "form-control", id = "money", @placeholder = "Costo", required = "required" })
+                                    <br />
+                                    <label>Precio:</label>
+                                    @Html.TextBoxFor(model => model.precio, new { @class = "form-control", id = "money", @placeholder = "Precio", required = "required" })
+                                    <div class="form-label-group ">
+                                        <br />
+                                        @{
+                                            List<SelectListItem> listItems2 = new List<SelectListItem>();
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Activo",
+                                                Value = "true",
+                                                Selected = true
+
+                                            });
+                                            listItems2.Add(new SelectListItem
+                                            {
+                                                Text = "Inactivo",
+                                                Value = "false",
+                                            });
+                                        }
+                                        <div class="form-label-group">
+                                            <label>Estado:</label>
+                                            @Html.DropDownListFor(model => model.activo, listItems2, new { @class = "form-control", Type = "text", Data_placeholder = "Estado", required = "required" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="modal-footer">
+                                        <input type="button" value="Volver" class="btn btn-danger" onclick="location.href='@Url.Action("Index", "Articulos")';" />
+                                        <input type="submit" value="Agregar" class="btn btn-primary" id="btnSubmit" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/modals.js"></script>
+}

@@ -1,0 +1,23 @@
+﻿@model LDFacturacionDO.Factura
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h5>Facturación</h5>
+            <br /><br />
+            <input class="btn btn-primary btn-lg btn-block" type="button" value="Iniciar Factura" onclick="location.href='@Url.Action("Create", "Factura")'" />
+        </div>
+        <div class="col animated fadeInUpBig">
+            <div class="jumbotron animated fadeIn">
+                <p class="lead">Presione el botón para facturar</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

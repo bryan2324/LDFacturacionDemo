@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LDFacturacionDO.Articulo>
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Html.Raw(TempData["msg"])
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col">
+
+            <h5>Artículos</h5>
+            <br />
+            <input class="btn btn-primary btn-lg btn-block" type="button" value="Agregar" onclick="location.href='@Url.Action("Create", "Articulos")'" />
+
+        </div>
+        <div class="col-sm-8">
+
+            <div class="card-deck">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6" id="tarjeta">
+                        <div class="card animated fadeInUpBig">
+                            <img src="https://i.udemycdn.com/course/750x422/1352222_6bfa_2.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.descripcion - @item.codigo</h5>
+                                <p class="card-text">
+
+                                    Codigo: @item.codigo <br />
+                                    Costo: ₡@item.costo.ToString("#.##") <br />
+                                    Precio: ₡@item.precio.ToString("#.##")
+                                    @{ if (item.activo == true)
+                                        {
+                                        <p>Estado: Activo</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Estado: Inactivo</p>
+                                    }
+                                    }
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            @Html.ActionLink("Modificar", "Edit", new { id = item.codigo }, new { @class = "btn btn-primary btn-sm" })
+                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.codigo }, new { @class = "btn btn-danger btn-sm" })
+                                        </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
